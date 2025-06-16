@@ -248,118 +248,65 @@ interface Trade {
       margin: 0;
     }
     h1 {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
     h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      margin: 1rem 0;
     }
     .tabs {
       display: flex;
       gap: 1rem;
-      margin: 0 2rem 2rem 2rem;
+      margin: 0 2rem;
       position: relative;
       z-index: 1;
     }
     .tabs button {
-      flex: 1;
-      padding: 1rem;
-      font-size: 0.9rem;
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
-      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Core Sans D', sans-serif;
+      font-weight: bold;
+      cursor: pointer;
       transition: all 0.3s ease;
-    }
-    .tabs button:hover {
-      padding: 1.2rem;
-      font-size: 1rem;
-      transform: scale(1.05);
-    }
-    .tabs button.matched {
-      background: #2ecc71;
-      color: white;
-      border-color: #2ecc71;
-    }
-    .tabs button.unmatched {
-      background: #dc3545;
-      color: white;
-      border-color: #dc3545;
-    }
-    .tabs button.partiallyMatched {
-      background: #FE7541;
-      color: white;
-      border-color: #FE7541;
+      background: rgba(255, 255, 255, 0.9);
+      color: #0E5447;
     }
     .tabs button.active {
-      font-weight: bold;
-      padding: 1.2rem;
-      font-size: 1rem;
-      transform: scale(1.05);
+      background: #0E5447;
+      color: white;
+    }
+    .tabs button:hover:not(.active) {
+      background: rgba(14, 84, 71, 0.1);
     }
     section {
-      margin: 0 2rem 2rem 2rem;
+      margin: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      padding: 1rem;
       position: relative;
       z-index: 1;
-      max-height: calc(100vh - 350px);
-      overflow: hidden;
-      padding-bottom: 2rem;
     }
     .trades-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
-      position: relative;
-      z-index: 1;
-      background: white;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd;
-    }
-    .trades-table thead {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: #0E5447;
-    }
-    .trades-table tbody {
-      display: block;
-      height: calc(100vh - 450px);
-      overflow-y: auto;
-      margin-bottom: 1rem;
-    }
-    .trades-table thead tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
-    }
-    .trades-table tbody tr {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
     }
     .trades-table th,
     .trades-table td {
-      padding: 1rem;
+      padding: 0.75rem;
       text-align: left;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
     }
     .trades-table th {
       background: #0E5447;
       color: white;
+      font-family: 'Core Sans D', sans-serif;
       font-weight: bold;
-      font-size: 0.9rem;
-      padding: 0.75rem 1rem;
-      position: sticky;
-      top: 0;
-      border: 1px solid #0E5447;
     }
-    .trades-table td {
-      background: white;
-      border: 1px solid #ddd;
-    }
-    .trades-table tr:hover td {
-      background: #f9f9f9;
+    .trades-table tr:hover {
+      background: rgba(14, 84, 71, 0.05);
     }
   `]
 })
@@ -371,196 +318,53 @@ export class TradesComponent {
   matchedTrades: Trade[] = [
     {
       id: 'TRD001',
-      sourceName: 'Source A',
+      sourceName: 'Bloomberg',
       isin: 'US0378331005',
       quantity: 1000,
       price: 150.25,
-      counterparty: 'Counterparty X',
+      counterparty: 'Goldman Sachs',
       tradeDate: '2024-03-15',
       settlementDate: '2024-03-17',
       executionTimestamp: '2024-03-15 10:30:00'
     },
     {
       id: 'TRD002',
-      sourceName: 'Source B',
-      isin: 'US5949181045',
+      sourceName: 'Reuters',
+      isin: 'US88160R1014',
       quantity: 500,
       price: 275.50,
-      counterparty: 'Counterparty Y',
+      counterparty: 'Morgan Stanley',
       tradeDate: '2024-03-15',
       settlementDate: '2024-03-17',
       executionTimestamp: '2024-03-15 11:15:00'
-    },
-    {
-      id: 'TRD003',
-      sourceName: 'Source C',
-      isin: 'US88160R1014',
-      quantity: 750,
-      price: 180.75,
-      counterparty: 'Counterparty Z',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 13:45:00'
-    },
-    {
-      id: 'TRD004',
-      sourceName: 'Source A',
-      isin: 'US0378331005',
-      quantity: 2000,
-      price: 151.00,
-      counterparty: 'Counterparty X',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 14:20:00'
-    },
-    {
-      id: 'TRD005',
-      sourceName: 'Source B',
-      isin: 'US5949181045',
-      quantity: 1200,
-      price: 276.25,
-      counterparty: 'Counterparty Y',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 15:00:00'
-    },
-    {
-      id: 'TRD016',
-      sourceName: 'Source C',
-      isin: 'US88160R1014',
-      quantity: 1800,
-      price: 181.50,
-      counterparty: 'Counterparty Z',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 15:30:00'
-    },
-    {
-      id: 'TRD017',
-      sourceName: 'Source A',
-      isin: 'US0378331005',
-      quantity: 3000,
-      price: 152.00,
-      counterparty: 'Counterparty X',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 16:00:00'
     }
   ];
 
   unmatchedTrades: Trade[] = [
     {
-      id: 'TRD006',
-      sourceName: 'Source D',
-      isin: 'US0378331005',
-      quantity: 800,
-      price: 149.50,
-      counterparty: 'Counterparty W',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 09:45:00'
-    },
-    {
-      id: 'TRD007',
-      sourceName: 'Source E',
+      id: 'TRD003',
+      sourceName: 'Bloomberg',
       isin: 'US5949181045',
-      quantity: 1500,
-      price: 274.75,
-      counterparty: 'Counterparty V',
+      quantity: 2000,
+      price: 180.75,
+      counterparty: 'JP Morgan',
       tradeDate: '2024-03-15',
       settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 10:15:00'
-    },
-    {
-      id: 'TRD008',
-      sourceName: 'Source F',
-      isin: 'US88160R1014',
-      quantity: 300,
-      price: 181.25,
-      counterparty: 'Counterparty U',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 11:30:00'
-    },
-    {
-      id: 'TRD009',
-      sourceName: 'Source D',
-      isin: 'US0378331005',
-      quantity: 2500,
-      price: 150.75,
-      counterparty: 'Counterparty W',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 13:00:00'
-    },
-    {
-      id: 'TRD010',
-      sourceName: 'Source E',
-      isin: 'US5949181045',
-      quantity: 900,
-      price: 275.00,
-      counterparty: 'Counterparty V',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 14:45:00'
+      executionTimestamp: '2024-03-15 14:20:00'
     }
   ];
 
   partiallyMatchedTrades: Trade[] = [
     {
-      id: 'TRD011',
-      sourceName: 'Source G',
-      isin: 'US0378331005',
-      quantity: 1200,
-      price: 150.50,
-      counterparty: 'Counterparty T',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 09:30:00'
-    },
-    {
-      id: 'TRD012',
-      sourceName: 'Source H',
-      isin: 'US5949181045',
-      quantity: 1800,
-      price: 275.25,
-      counterparty: 'Counterparty S',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 10:45:00'
-    },
-    {
-      id: 'TRD013',
-      sourceName: 'Source I',
-      isin: 'US88160R1014',
-      quantity: 600,
-      price: 180.50,
-      counterparty: 'Counterparty R',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 12:15:00'
-    },
-    {
-      id: 'TRD014',
-      sourceName: 'Source G',
-      isin: 'US0378331005',
-      quantity: 3000,
-      price: 151.25,
-      counterparty: 'Counterparty T',
-      tradeDate: '2024-03-15',
-      settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 13:30:00'
-    },
-    {
-      id: 'TRD015',
-      sourceName: 'Source H',
-      isin: 'US5949181045',
+      id: 'TRD004',
+      sourceName: 'Reuters',
+      isin: 'US67066G1040',
       quantity: 1500,
-      price: 276.00,
-      counterparty: 'Counterparty S',
+      price: 95.25,
+      counterparty: 'Citigroup',
       tradeDate: '2024-03-15',
       settlementDate: '2024-03-17',
-      executionTimestamp: '2024-03-15 15:15:00'
+      executionTimestamp: '2024-03-15 15:45:00'
     }
   ];
 
@@ -569,8 +373,8 @@ export class TradesComponent {
   }
 
   editTrade(trade: Trade) {
-    console.log('Edit trade:', trade);
-    // Implement edit logic here
+    console.log('Editing trade:', trade);
+    // Implement edit functionality
   }
 
   logout() {
